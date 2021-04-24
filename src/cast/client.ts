@@ -1,9 +1,12 @@
 import { Client as CastV2Client } from 'castv2';
 
-export interface CastClientConfig {
+export interface CastConnectionConfig {
   host: string;
-  onStart: () => Promise<void>;
-  onEnd: () => Promise<void>;
+}
+
+export interface CastClientCallbacks {
+  onStart: () => void;
+  onEnd: () => void;
 }
 
 export interface MessageData {
@@ -18,12 +21,15 @@ export interface MessageData {
 
 export class CastClient {
   host: string;
-  onStart: () => Promise<void>;
-  onEnd: () => Promise<void>;
+  onStart: () => void;
+  onEnd: () => void;
 
   lastSessionId: string = null;
 
-  constructor({ host, onStart, onEnd }: CastClientConfig) {
+  constructor(
+    { host }: CastConnectionConfig,
+    { onStart, onEnd }: CastClientCallbacks
+  ) {
     this.host = host;
     this.onStart = onStart;
     this.onEnd = onEnd;
@@ -69,7 +75,7 @@ export class CastClient {
     });
   }
 
-  async onMessage(data: MessageData, broadcast: boolean) {
+  onMessage(data: MessageData, broadcast: boolean) {
     console.log(JSON.stringify({ data, broadcast }, null, 2));
     if (data.type != 'RECEIVER_STATUS' || !data.status.applications) {
       console.log(data.type);
@@ -78,11 +84,11 @@ export class CastClient {
 
     if (data.status.applications[0].isIdleScreen === true) {
       console.log('Looks like a session ended');
-      await this.onEnd();
+      return this.onEnd();
     } else {
       this.lastSessionId = data.status.applications[0].sessionId;
       console.log('New session: ' + this.lastSessionId);
-      await this.onStart();
+      return this.onStart();
     }
   }
 }
