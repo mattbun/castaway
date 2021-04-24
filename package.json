@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-template",
+  "name": "castaway",
   "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
