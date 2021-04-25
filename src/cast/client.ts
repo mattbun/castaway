@@ -80,7 +80,7 @@ export class CastClient {
     if (data.status.applications[0].isIdleScreen === true) {
       console.log('Looks like a session ended');
       return this.callbacks.onEnd();
-    } else {
+    } else if (this.lastSessionId !== data.status.applications[0].sessionId) {
       this.lastSessionId = data.status.applications[0].sessionId;
       console.log('New session: ' + this.lastSessionId);
       return this.callbacks.onStart();
