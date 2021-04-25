@@ -21,18 +21,13 @@ export interface MessageData {
 
 export class CastClient {
   host: string;
-  onStart: () => void;
-  onEnd: () => void;
+  callbacks: CastClientCallbacks;
 
   lastSessionId: string = null;
 
-  constructor(
-    { host }: CastConnectionConfig,
-    { onStart, onEnd }: CastClientCallbacks
-  ) {
+  constructor({ host }: CastConnectionConfig, callbacks: CastClientCallbacks) {
     this.host = host;
-    this.onStart = onStart;
-    this.onEnd = onEnd;
+    this.callbacks = callbacks;
   }
 
   start() {
@@ -84,11 +79,11 @@ export class CastClient {
 
     if (data.status.applications[0].isIdleScreen === true) {
       console.log('Looks like a session ended');
-      return this.onEnd();
+      return this.callbacks.onEnd();
     } else {
       this.lastSessionId = data.status.applications[0].sessionId;
       console.log('New session: ' + this.lastSessionId);
-      return this.onStart();
+      return this.callbacks.onStart();
     }
   }
 }
