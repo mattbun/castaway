@@ -29,8 +29,8 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm/v7,linux/arm64
-          push: false # TODO be sure to update tags below as well
+          push: true
           tags: |
-            mattbun/nodejs-template:latest
-            mattbun/nodejs-template:main
-            mattbun/nodejs-template:${{ github.event.release.tag_name }}
+            mattbun/castaway:latest
+            mattbun/castaway:main
+            mattbun/castaway:${{ github.event.release.tag_name }}
