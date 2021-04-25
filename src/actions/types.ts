@@ -1,8 +1,5 @@
-import * as yargs from 'yargs';
+import { CastClientCallbacks } from '../cast/client';
 
-export type Arguments = typeof yargs;
-
-export interface ArgumentParser {
-  onParseArguments: (args: Arguments) => void;
-  isReady: () => boolean;
+export interface CastawayAction extends CastClientCallbacks {
+  isConfigured: () => boolean;
 }

@@ -1,27 +1,63 @@
 import { CastClient } from './cast/client';
+import { CastawayAction } from './actions/types';
 import { ConsoleAction } from './actions/console';
+import { MqttAction } from './actions/mqtt';
 import * as yargs from 'yargs';
 
-const args = yargs.env('CASTAWAY').option('host', {
-  describe: 'cast device to watch',
-  type: 'string',
-  demandOption: true,
-});
+const argv = yargs
+  .env('CASTAWAY')
+  .option('host', {
+    describe: 'cast device to watch',
+    type: 'string',
+    demandOption: true,
+  })
+  .option('console-on-start', {
+    describe: 'log message to console on start',
+    type: 'boolean',
+  })
+  .option('console-on-end', {
+    describe: 'log message to console on end',
+    type: 'boolean',
+  })
+  .option('mqtt-broker', {
+    describe: 'the address of a mqtt broker',
+    type: 'string',
+  })
+  .option('mqtt-topic', {
+    describe: 'mqtt topic to post to',
+    type: 'string',
+  })
+  .option('mqtt-message-on-start', {
+    describe: 'message to post on start',
+    type: 'string',
+  })
+  .option('mqtt-message-on-end', {
+    describe: 'message to post on end',
+    type: 'string',
+  }).argv;
 
-const potentialActions = [new ConsoleAction()];
+const actions: Array<CastawayAction> = [
+  new MqttAction({
+    broker: argv['mqtt-broker'],
+    topic: argv['mqtt-topic'],
+    onStartMessage: argv['mqtt-message-on-start'],
+    onEndMessage: argv['mqtt-message-on-end'],
+  }),
+  new ConsoleAction({
+    enableOnStart: argv['console-on-start'],
+    enableOnEnd: argv['console-on-end'],
+  }),
+];
 
-potentialActions.forEach((action) => action.onParseArguments(args));
-const action = potentialActions.find((action) => action.isReady());
-if (!action) {
+const activeAction = actions.find((action) => action.isConfigured());
+if (!activeAction) {
   throw Error('Please configure something to happen on cast events');
 }
 
-const { host } = args.argv;
-
 const client = new CastClient(
   {
-    host,
+    host: argv.host,
   },
-  action
+  activeAction
 );
 client.start();

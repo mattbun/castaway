@@ -1,9 +1,19 @@
-import { CastClientCallbacks } from '../cast/client';
-import { ArgumentParser, Arguments } from './types';
+import { CastawayAction } from './types';
 
-export class ConsoleAction implements CastClientCallbacks, ArgumentParser {
+export class ConsoleAction implements CastawayAction {
   enableOnStart: boolean = false;
   enableOnEnd: boolean = false;
+
+  constructor({
+    enableOnStart,
+    enableOnEnd,
+  }: {
+    enableOnStart: boolean;
+    enableOnEnd: boolean;
+  }) {
+    this.enableOnStart = enableOnStart;
+    this.enableOnEnd = enableOnEnd;
+  }
 
   onStart() {
     if (this.enableOnStart) {
@@ -17,22 +27,7 @@ export class ConsoleAction implements CastClientCallbacks, ArgumentParser {
     }
   }
 
-  onParseArguments(args: Arguments) {
-    const argv = args
-      .option('console-on-start', {
-        describe: 'log message to console on start',
-        type: 'boolean',
-      })
-      .option('console-on-end', {
-        describe: 'log message to console on end',
-        type: 'boolean',
-      }).argv;
-
-    this.enableOnStart = argv['console-on-start'];
-    this.enableOnEnd = argv['console-on-end'];
-  }
-
-  isReady() {
+  isConfigured() {
     return this.enableOnStart || this.enableOnEnd;
   }
 }

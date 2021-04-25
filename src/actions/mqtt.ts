@@ -1,12 +1,28 @@
 import * as mqtt from 'async-mqtt';
-import { CastClientCallbacks } from '../cast/client';
-import { ArgumentParser, Arguments } from './types';
+import { CastawayAction } from './types';
 
-export class MqttAction implements CastClientCallbacks, ArgumentParser {
+export class MqttAction implements CastawayAction {
   broker: string;
   topic: string;
   onStartMessage: string;
   onEndMessage: string;
+
+  constructor({
+    broker,
+    topic,
+    onStartMessage,
+    onEndMessage,
+  }: {
+    broker: string;
+    topic: string;
+    onStartMessage: string;
+    onEndMessage: string;
+  }) {
+    this.broker = broker;
+    this.topic = topic;
+    this.onStartMessage = onStartMessage;
+    this.onEndMessage = onEndMessage;
+  }
 
   async onStart() {
     console.log(this.onStartMessage);
@@ -41,32 +57,7 @@ export class MqttAction implements CastClientCallbacks, ArgumentParser {
     }
   }
 
-  onParseArguments(args: Arguments) {
-    const argv = args
-      .option('mqtt-broker', {
-        describe: 'the address of a mqtt broker',
-        type: 'string',
-      })
-      .option('mqtt-topic', {
-        describe: 'mqtt topic to post to',
-        type: 'string',
-      })
-      .option('mqtt-message-on-start', {
-        describe: 'message to post on start',
-        type: 'string',
-      })
-      .option('mqtt-message-on-end', {
-        describe: 'message to post on end',
-        type: 'string',
-      }).argv;
-
-    this.broker = argv['mqtt-broker'];
-    this.topic = argv['mqtt-topic'];
-    this.onStartMessage = argv['mqtt-message-on-start'];
-    this.onEndMessage = argv['mqtt-message-on-end'];
-  }
-
-  isReady() {
+  isConfigured() {
     return !!this.broker;
   }
 }
