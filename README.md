@@ -27,7 +27,7 @@ docker run --rm -it mattbun/castaway \
   --mqtt-broker <address-of-mqtt-broker> \
   --mqtt-topic 'cool/topic' \
   --mqtt-message-on-start 'session_connected' \
-  --mqtt-message-on-end 'no_session' \
+  --mqtt-message-on-end 'no_session'
 ```
 
 ### Environment Variables (docker-compose)
