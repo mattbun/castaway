@@ -6,7 +6,10 @@ describe('onMessage', () => {
       onStart: jest.fn(),
       onEnd: jest.fn(),
     };
-    const client = new CastClient({ host: 'some host' }, callbacks);
+    const client = new CastClient(
+      { host: 'some host', enableDebugLogs: false },
+      callbacks
+    );
 
     client.onMessage(
       {
@@ -32,7 +35,10 @@ describe('onMessage', () => {
       onStart: jest.fn(),
       onEnd: jest.fn(),
     };
-    const client = new CastClient({ host: 'some host' }, callbacks);
+    const client = new CastClient(
+      { host: 'some host', enableDebugLogs: false },
+      callbacks
+    );
 
     client.onMessage(
       {
@@ -53,7 +59,10 @@ describe('onMessage', () => {
       onStart: jest.fn(),
       onEnd: jest.fn(),
     };
-    const client = new CastClient({ host: 'some host' }, callbacks);
+    const client = new CastClient(
+      { host: 'some host', enableDebugLogs: false },
+      callbacks
+    );
 
     client.onMessage(
       {
@@ -79,7 +88,10 @@ describe('onMessage', () => {
       onStart: jest.fn(),
       onEnd: jest.fn(),
     };
-    const client = new CastClient({ host: 'some host' }, callbacks);
+    const client = new CastClient(
+      { host: 'some host', enableDebugLogs: false },
+      callbacks
+    );
 
     client.onMessage(
       {
@@ -105,7 +117,10 @@ describe('onMessage', () => {
       onStart: jest.fn(),
       onEnd: jest.fn(),
     };
-    const client = new CastClient({ host: 'some host' }, callbacks);
+    const client = new CastClient(
+      { host: 'some host', enableDebugLogs: false },
+      callbacks
+    );
     client.lastSessionId = 'some session id';
 
     client.onMessage(

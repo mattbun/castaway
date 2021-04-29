@@ -2,6 +2,7 @@ import { Client as CastV2Client } from 'castv2';
 
 export interface CastConnectionConfig {
   host: string;
+  enableDebugLogs: boolean;
 }
 
 export interface CastClientCallbacks {
@@ -21,13 +22,18 @@ export interface MessageData {
 
 export class CastClient {
   host: string;
+  enableDebugLogs: boolean;
   callbacks: CastClientCallbacks;
 
   lastSessionId: string = null;
 
-  constructor({ host }: CastConnectionConfig, callbacks: CastClientCallbacks) {
+  constructor(
+    { host, enableDebugLogs }: CastConnectionConfig,
+    callbacks: CastClientCallbacks
+  ) {
     this.host = host;
     this.callbacks = callbacks;
+    this.enableDebugLogs = enableDebugLogs;
   }
 
   start() {
@@ -71,9 +77,11 @@ export class CastClient {
   }
 
   onMessage(data: MessageData, broadcast: boolean) {
-    console.log(JSON.stringify({ data, broadcast }, null, 2));
-    if (data.type != 'RECEIVER_STATUS' || !data.status.applications) {
-      console.log(data.type);
+    if (this.enableDebugLogs) {
+      console.log(JSON.stringify({ data, broadcast }, null, 2));
+    }
+
+    if (data.type !== 'RECEIVER_STATUS') {
       return;
     }
 

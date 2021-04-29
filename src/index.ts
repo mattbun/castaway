@@ -11,6 +11,10 @@ const argv = yargs
     type: 'string',
     demandOption: true,
   })
+  .option('debug', {
+    describe: 'print all cast events to console',
+    type: 'boolean',
+  })
   .option('console-on-start', {
     describe: 'log message to console on start',
     type: 'boolean',
@@ -57,6 +61,7 @@ if (!activeAction) {
 const client = new CastClient(
   {
     host: argv.host,
+    enableDebugLogs: argv.debug,
   },
   activeAction
 );
