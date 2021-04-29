@@ -85,10 +85,19 @@ export class CastClient {
       return;
     }
 
-    if (data.status.applications[0].isIdleScreen === true) {
+    // TODO use optional chaining
+    const hasApplication = !!data.status.applications;
+    const sessionIsIdleScreen =
+      data.status.applications && data.status.applications[0].isIdleScreen;
+    const sessionIdHasChanged =
+      hasApplication &&
+      this.lastSessionId !== data.status.applications[0].sessionId;
+
+    if (this.lastSessionId && (!hasApplication || sessionIsIdleScreen)) {
       console.log('Looks like a session ended');
+      this.lastSessionId = null;
       return this.callbacks.onEnd();
-    } else if (this.lastSessionId !== data.status.applications[0].sessionId) {
+    } else if (sessionIdHasChanged && !sessionIsIdleScreen) {
       this.lastSessionId = data.status.applications[0].sessionId;
       console.log('New session: ' + this.lastSessionId);
       return this.callbacks.onStart();
