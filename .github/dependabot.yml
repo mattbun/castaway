@@ -8,3 +8,6 @@ updates:
       prefix: 'fix'
       prefix-development: 'build'
       include: 'scope'
+    allow:
+      # Allow both direct and indirect updates for all packages
+      - dependency-type: 'production'
