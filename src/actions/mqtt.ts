@@ -13,10 +13,10 @@ export class MqttAction implements CastawayAction {
     onStartMessage,
     onEndMessage,
   }: {
-    broker: string;
-    topic: string;
-    onStartMessage: string;
-    onEndMessage: string;
+    broker?: string;
+    topic?: string;
+    onStartMessage?: string;
+    onEndMessage?: string;
   }) {
     this.broker = broker;
     this.topic = topic;
