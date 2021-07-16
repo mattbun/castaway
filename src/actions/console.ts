@@ -15,13 +15,13 @@ export class ConsoleAction implements CastawayAction {
     this.enableOnEnd = enableOnEnd;
   }
 
-  onStart() {
+  async onStart() {
     if (this.enableOnStart) {
       console.log('onStart');
     }
   }
 
-  onEnd() {
+  async onEnd() {
     if (this.enableOnEnd) {
       console.log('onEnd');
     }

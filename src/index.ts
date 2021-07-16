@@ -2,6 +2,7 @@ import { CastClient } from './cast/client';
 import { CastawayAction } from './actions/types';
 import { ConsoleAction } from './actions/console';
 import { MqttAction } from './actions/mqtt';
+import { WebhookAction } from './actions/webhook';
 import * as yargs from 'yargs';
 
 const argv = yargs
@@ -38,6 +39,14 @@ const argv = yargs
   .option('mqtt-message-on-end', {
     describe: 'message to post on end',
     type: 'string',
+  })
+  .option('webhook-on-start', {
+    describe: 'webhook to call on start',
+    type: 'string',
+  })
+  .option('webhook-on-end', {
+    describe: 'webhook to call on end',
+    type: 'string',
   }).argv;
 
 const actions: Array<CastawayAction> = [
@@ -50,6 +59,10 @@ const actions: Array<CastawayAction> = [
   new ConsoleAction({
     enableOnStart: argv['console-on-start'],
     enableOnEnd: argv['console-on-end'],
+  }),
+  new WebhookAction({
+    webhookOnStart: argv['webhook-on-start'],
+    webhookOnEnd: argv['webhook-on-end'],
   }),
 ];
 

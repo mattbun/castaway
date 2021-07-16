@@ -6,8 +6,8 @@ export interface CastConnectionConfig {
 }
 
 export interface CastClientCallbacks {
-  onStart: () => void;
-  onEnd: () => void;
+  onStart: () => Promise<void>;
+  onEnd: () => Promise<void>;
 }
 
 export interface MessageData {
