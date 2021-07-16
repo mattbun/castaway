@@ -4,8 +4,9 @@ Perform actions when cast sessions start or end!
 
 So far, it can:
 
-* Post to MQTT
-* Write to console
+- Post to MQTT
+- Call a webhook
+- Write to console
 
 ## Getting Started
 
