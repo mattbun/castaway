@@ -25,12 +25,9 @@ export class MqttAction implements CastawayAction {
   }
 
   async onStart() {
-    console.log(this.onStartMessage);
     if (!this.onStartMessage) {
       return;
     }
-
-    console.log('onStart');
 
     try {
       const client = await mqtt.connectAsync(this.broker);
@@ -42,12 +39,10 @@ export class MqttAction implements CastawayAction {
   }
 
   async onEnd() {
-    console.log(this.onEndMessage);
     if (!this.onEndMessage) {
       return;
     }
 
-    console.log('onEnd');
     try {
       const client = await mqtt.connectAsync(this.broker);
       await client.publish(this.topic, this.onEndMessage);
