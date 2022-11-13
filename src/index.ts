@@ -56,7 +56,8 @@ const argv = yargs
   .option('command-on-end', {
     describe: 'command to run on end',
     type: 'string',
-  }).argv;
+  })
+  .parseSync();
 
 const actions: Array<CastawayAction> = [
   new MqttAction({
