@@ -7,6 +7,7 @@ So far, it can:
 - Post to MQTT
 - Call a webhook
 - Write to console
+- Run a command
 
 ## Getting Started
 

@@ -3,6 +3,7 @@ import { CastawayAction } from './actions/types';
 import { ConsoleAction } from './actions/console';
 import { MqttAction } from './actions/mqtt';
 import { WebhookAction } from './actions/webhook';
+import { CommandAction } from './actions/command';
 import * as yargs from 'yargs';
 
 const argv = yargs
@@ -47,6 +48,14 @@ const argv = yargs
   .option('webhook-on-end', {
     describe: 'webhook to call on end',
     type: 'string',
+  })
+  .option('command-on-start', {
+    describe: 'command to run on start',
+    type: 'string',
+  })
+  .option('command-on-end', {
+    describe: 'command to run on end',
+    type: 'string',
   }).argv;
 
 const actions: Array<CastawayAction> = [
@@ -63,6 +72,10 @@ const actions: Array<CastawayAction> = [
   new WebhookAction({
     webhookOnStart: argv['webhook-on-start'],
     webhookOnEnd: argv['webhook-on-end'],
+  }),
+  new CommandAction({
+    commandOnStart: argv['command-on-start'],
+    commandOnEnd: argv['command-on-end'],
   }),
 ];
 
