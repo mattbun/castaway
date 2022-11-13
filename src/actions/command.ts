@@ -33,6 +33,6 @@ export class CommandAction implements CastawayAction {
   }
 
   isConfigured() {
-    return this.commandOnStart.length > 0 || this.commandOnEnd.length > 0;
+    return !!this.commandOnStart || !!this.commandOnEnd;
   }
 }
