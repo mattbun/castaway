@@ -16,7 +16,7 @@
     "async-mqtt": "2.6.3",
     "castv2": "0.1.10",
     "got": "11.8.5",
-    "yargs": "16.2.0"
+    "yargs": "17.6.2"
   },
   "devDependencies": {
     "@types/jest": "29.2.2",
