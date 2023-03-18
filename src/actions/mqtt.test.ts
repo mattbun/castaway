@@ -1,4 +1,4 @@
-import * as mqtt from 'async-mqtt';
+import mqtt from 'async-mqtt';
 
 import { MqttAction } from './mqtt.js';
 

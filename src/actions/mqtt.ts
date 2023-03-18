@@ -1,4 +1,4 @@
-import * as mqtt from 'async-mqtt';
+import mqtt from 'async-mqtt';
 import { CastawayAction } from './types.js';
 
 export class MqttAction implements CastawayAction {
