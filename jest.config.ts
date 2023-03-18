@@ -6,9 +6,18 @@
 export default {
   clearMocks: true,
   coverageProvider: 'v8',
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
   testEnvironment: 'node',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
   transform: {
-    '^.+\\.ts?$': 'ts-jest',
+    '^.+\\.ts?$': [
+      'ts-jest',
+      {
+        useESM: true,
+      },
+    ],
   },
+  extensionsToTreatAsEsm: ['.ts'],
 };
