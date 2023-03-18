@@ -30,7 +30,6 @@ describe('WebhookAction', () => {
   describe('onStart', () => {
     it('calls the onStart webhook', async () => {
       const webhookAction = new WebhookAction({ webhookOnStart: 'something' });
-      jest.spyOn(got, 'get').mockResolvedValue({});
 
       await webhookAction.onStart();
 
@@ -40,7 +39,6 @@ describe('WebhookAction', () => {
 
     it('does not call the webhook if it is not defined', async () => {
       const webhookAction = new WebhookAction({});
-      jest.spyOn(got, 'get').mockResolvedValue({});
 
       await webhookAction.onStart();
 
@@ -51,7 +49,6 @@ describe('WebhookAction', () => {
   describe('onEnd', () => {
     it('calls the onEnd webhook', async () => {
       const webhookAction = new WebhookAction({ webhookOnEnd: 'something' });
-      jest.spyOn(got, 'get').mockResolvedValue({});
 
       await webhookAction.onEnd();
 
@@ -61,7 +58,6 @@ describe('WebhookAction', () => {
 
     it('does not call the webhook if it is not defined', async () => {
       const webhookAction = new WebhookAction({});
-      jest.spyOn(got, 'get').mockResolvedValue({});
 
       await webhookAction.onEnd();
 
