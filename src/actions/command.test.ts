@@ -1,7 +1,7 @@
 import * as ChildProcess from 'child_process';
 import { PassThrough } from 'stream';
 
-import { CommandAction } from './command';
+import { CommandAction } from './command.js';
 
 describe('CommandAction', () => {
   describe('isConfigured', () => {

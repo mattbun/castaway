@@ -1,4 +1,4 @@
-import { CastawayAction } from './types';
+import { CastawayAction } from './types.js';
 import { exec } from 'child_process';
 
 export class CommandAction implements CastawayAction {

@@ -1,5 +1,5 @@
 import got from 'got';
-import { WebhookAction } from './webhook';
+import { WebhookAction } from './webhook.js';
 
 describe('WebhookAction', () => {
   describe('isConfigured', () => {

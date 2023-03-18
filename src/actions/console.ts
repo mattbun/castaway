@@ -1,4 +1,4 @@
-import { CastawayAction } from './types';
+import { CastawayAction } from './types.js';
 
 export class ConsoleAction implements CastawayAction {
   enableOnStart: boolean = false;

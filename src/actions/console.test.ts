@@ -1,4 +1,4 @@
-import { ConsoleAction } from './console';
+import { ConsoleAction } from './console.js';
 
 describe('ConsoleAction', () => {
   describe('isConfigured', () => {

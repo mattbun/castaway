@@ -1,4 +1,4 @@
-import { CastClient } from './client';
+import { CastClient } from './client.js';
 
 describe('onMessage', () => {
   it('does nothing if type is not "RECEIVER_STATUS"', () => {

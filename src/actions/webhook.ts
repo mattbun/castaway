@@ -1,5 +1,5 @@
 import got from 'got';
-import { CastawayAction } from './types';
+import { CastawayAction } from './types.js';
 
 export class WebhookAction implements CastawayAction {
   webhookOnStart: string;
