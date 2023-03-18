@@ -1,5 +1,5 @@
 import * as mqtt from 'async-mqtt';
-import { CastawayAction } from './types';
+import { CastawayAction } from './types.js';
 
 export class MqttAction implements CastawayAction {
   broker: string;

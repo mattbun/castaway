@@ -1,12 +1,13 @@
-import { CastClient } from './cast/client';
-import { CastawayAction } from './actions/types';
-import { ConsoleAction } from './actions/console';
-import { MqttAction } from './actions/mqtt';
-import { WebhookAction } from './actions/webhook';
-import { CommandAction } from './actions/command';
-import * as yargs from 'yargs';
+import { CastClient } from './cast/client.js';
+import { CastawayAction } from './actions/types.js';
+import { ConsoleAction } from './actions/console.js';
+import { MqttAction } from './actions/mqtt.js';
+import { WebhookAction } from './actions/webhook.js';
+import { CommandAction } from './actions/command.js';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
-const argv = yargs
+const argv = yargs(hideBin(process.argv))
   .env('CASTAWAY')
   .option('host', {
     describe: 'cast device to watch',

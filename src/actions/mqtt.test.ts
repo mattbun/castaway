@@ -1,6 +1,6 @@
 import * as mqtt from 'async-mqtt';
 
-import { MqttAction } from './mqtt';
+import { MqttAction } from './mqtt.js';
 
 const baseConfig = {
   broker: 'some broker',
