@@ -11,10 +11,14 @@ So far, it can:
 
 ## Getting Started
 
-[A docker image is available](https://hub.docker.com/repository/docker/mattbun/castaway). Get started by running
+Docker images are available at both [Docker Hub](https://hub.docker.com/repository/docker/mattbun/castaway) and [GitHub Container Registry](https://github.com/mattbun/castaway/pkgs/container/castaway). Get started by running:
 
 ```shell
+# Docker Hub
 docker run --rm -it mattbun/castaway --help
+
+# GitHub Container Registry
+docker run --rm -it ghcr.io/mattbun/castaway --help
 ```
 
 ## Configuration
@@ -24,7 +28,7 @@ Castaway can be configured by command line argument or by environment variable (
 ### Command Line Arguments
 
 ```shell
-docker run --rm -it mattbun/castaway \
+docker run --rm -it ghcr.io/mattbun/castaway \
   --host <address-of-cast-device> \
   --mqtt-broker <address-of-mqtt-broker> \
   --mqtt-topic 'cool/topic' \
@@ -40,7 +44,7 @@ Environment variables are prefixed with `CASTAWAY_` and follow the naming of the
 services:
   castaway:
     container_name: castaway
-    image: mattbun/castaway
+    image: ghcr.io/mattbun/castaway
     restart: unless-stopped
     environment:
       - CASTAWAY_HOST=<address-of-cast-device>
