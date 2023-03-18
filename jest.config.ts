@@ -12,7 +12,7 @@ export default {
   testEnvironment: 'node',
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
   transform: {
-    '^.+\\.ts?$': [
+    '^.+\\.m?[t]sx?$': [
       'ts-jest',
       {
         useESM: true,
